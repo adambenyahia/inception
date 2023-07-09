@@ -1,0 +1,26 @@
+version: '3'
+services:
+  nginx:
+    build: srcs/requirements/ngnix/
+    container_name: nginx
+    ports:
+      -"443:443"
+    depends_on:
+      - wordpress
+    restart: always
+  
+  wordpress:
+    build: srcs/requirements/wordpress/
+    container_name: wordpress
+    ports:
+      - "9000:9000"
+    depends_on:
+      - mariadb
+    restart: always
+
+  mariadb:
+    built: srcs/requirements/mariadb
+    container_name: mariadb
+    ports:
+      - "3306:3306"
+    restart: always
