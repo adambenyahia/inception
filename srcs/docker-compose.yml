@@ -24,3 +24,11 @@ services:
     ports:
       - "3306:3306"
     restart: always
+volumes:
+  wordpress:
+  mariadb:
+
+networks:
+  default:
+    external:
+      name: wordpress
