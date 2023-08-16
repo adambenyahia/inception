@@ -5,8 +5,8 @@ services:
     container_name: nginx
     ports:
       - "443:443"
-    # depends_on:
-    #   - wordpress
+    depends_on:
+      - wordpress
     volumes:
       - wordpress_volume:/var/www/html
     networks:
@@ -15,20 +15,20 @@ services:
       - .env
     restart: always
   
-  # wordpress:
-  #   build: requirements/wordpress/.
-  #   container_name: wordpress
-  #   ports:
-  #     - "9000:9000"
-  #   env_file:
-  #     - .env
-  #   volumes:  
-  #     - wordpress:/var/www/html
-  #   depends_on:
-  #     - mariadb
-  #   networks:
-  #     - inception
-  #   restart: always
+  wordpress:
+    build: requirements/wordpress/
+    container_name: wordpress
+    ports:
+      - "9000:9000"
+    env_file:
+      - .env
+    volumes:  
+      - wordpress_volume:/var/www/html
+    # depends_on:
+    #   - mariadb
+    networks:
+      - inception
+    # restart: always
 
   # mariadb:
   #   build: requirements/mariadb/.
@@ -51,8 +51,8 @@ volumes:
     #   type: none
     #   o: bind
     #   device: ../Data/wordpress
-  # mariadb:
-  #   name: mariadb
+  mariadb:
+    name: mariadb
   #   driver: local
   #   driver_opts:
   #     type: none

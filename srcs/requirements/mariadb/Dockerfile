@@ -6,6 +6,11 @@ RUN apt-get update && \
     mariadb \
     mariadb-client
 
-COPY config.sh /tmp/config.sh
+
+
+COPY config.sh /usr/local/bin/config.sh
+RUN chmod +x /usr/local/bin/config.sh
+
+EXPOSE 3306
 
 ENTRYPOINT [ "sh", "/tmp/config.sh" ]
