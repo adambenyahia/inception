@@ -4,5 +4,5 @@ down:
 	docker-compose  --file ./srcs/docker-compose.yml down
 
 clean: down
-	docker system prune -a
+	docker system prune -a 
 re: clean up

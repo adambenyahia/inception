@@ -28,7 +28,7 @@ services:
     #   - mariadb
     networks:
       - inception
-    # restart: always
+    restart: always
 
   # mariadb:
   #   build: requirements/mariadb/.
@@ -51,13 +51,13 @@ volumes:
     #   type: none
     #   o: bind
     #   device: ../Data/wordpress
-  mariadb:
-    name: mariadb
-  #   driver: local
-  #   driver_opts:
-  #     type: none
-  #     o: bind
-  #     device: ../Data/mariadb
+  # mariadb:
+  #   name: mariadb
+  # #   driver: local
+  # #   driver_opts:
+  # #     type: none
+  # #     o: bind
+  # #     device: ../Data/mariadb
 
 networks:
   inception:

@@ -3,9 +3,11 @@ FROM debian:latest
 RUN apt-get update && \
     apt-get upgrade && \
     apt-get -y install \
-    mariadb \
-    mariadb-client
+    mariadb-server 
 
+RUN mkdir -p /var/run/mysqld \
+&& chown -R mysql:mysql /var/run/mysqld \
+&& chmod 777 /var/run/mysqld
 
 
 COPY config.sh /usr/local/bin/config.sh
