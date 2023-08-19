@@ -6,5 +6,5 @@ down:
 clean: down
 	docker rmi -f $$(docker images -q)
 	docker volume prune -f 
-	# docker system prune -a --volumes
+	docker system prune -a --volumes
 re: clean up
