@@ -1,47 +1,47 @@
 version: '3'
 services:
-  nginx:
-    build: requirements/ngnix/
-    container_name: nginx
-    ports:
-      - "443:443"
-    depends_on:
-      - wordpress
-    volumes:
-      - wordpress_volume:/var/www/html
-    networks:
-      - inception
-    env_file:
-      - .env
-    restart: always
-  
-  wordpress:
-    build: requirements/wordpress/
-    container_name: wordpress
-    ports:
-      - "9000:9000"
-    env_file:
-      - .env
-    volumes:  
-      - wordpress_volume:/var/www/html
-    # depends_on:
-    #   - mariadb
-    networks:
-      - inception
-    restart: always
-
-  # mariadb:
-  #   build: requirements/mariadb/.
-  #   container_name: mariadb
+  # nginx:
+  #   build: requirements/ngnix/
+  #   container_name: nginx
   #   ports:
-  #     - "3306:3306"
+  #     - "443:443"
+  #   depends_on:
+  #     - wordpress
+  #   volumes:
+  #     - wordpress_volume:/var/www/html
+  #   networks:
+  #     - inception
   #   env_file:
   #     - .env
-  #   volumes:
-  #     - mariadb:/var/lib/mysql
+  #   restart: always
+  
+  # wordpress:
+  #   build: requirements/wordpress/
+  #   container_name: wordpress
+  #   ports:
+  #     - "9000:9000"
+  #   env_file:
+  #     - .env
+  #   volumes:  
+  #     - wordpress_volume:/var/www/html
+  #   depends_on:
+  #     - mariadb
   #   networks:
   #     - inception
   #   restart: always
+
+  mariadb:
+    build: requirements/mariadb/.
+    container_name: mariadb
+    ports:
+      - "3306:3306"
+    env_file:
+      - .env
+    volumes:
+      - mariadb:/var/lib/mysql
+    networks:
+      - inception
+
 
 volumes:
   wordpress_volume:
@@ -51,9 +51,9 @@ volumes:
     #   type: none
     #   o: bind
     #   device: ../Data/wordpress
-  # mariadb:
-  #   name: mariadb
-  # #   driver: local
+  mariadb:
+    name: mariadb
+    driver: local
   # #   driver_opts:
   # #     type: none
   # #     o: bind

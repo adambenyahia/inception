@@ -4,5 +4,7 @@ down:
 	docker-compose  --file ./srcs/docker-compose.yml down
 
 clean: down
-	docker system prune -a 
+	docker rmi -f $$(docker images -q)
+	docker volume prune -f 
+	# docker system prune -a --volumes
 re: clean up
