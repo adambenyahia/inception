@@ -46,7 +46,8 @@ COPY 50-server.cnf /etc/mysql/mariadb.conf.d/
 
 
 COPY config.sh /usr/local/bin/config.sh
-RUN chmod +x /usr/local/bin/config.sh && config.sh
+RUN chmod +x /usr/local/bin/config.sh 
 
 
-ENTRYPOINT [ "mysqld_safe" ] 
+ENTRYPOINT [ "config.sh" ] 
+

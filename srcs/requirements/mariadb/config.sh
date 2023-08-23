@@ -20,3 +20,7 @@ rm -rf database.sql
 # start mariadb
 
 service mariadb stop
+
+mysqld_safe
+
+# sleep infinity

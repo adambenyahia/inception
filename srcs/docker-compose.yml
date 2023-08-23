@@ -1,4 +1,4 @@
-version: '3'
+version: '3.7'
 services:
   nginx:
     build: requirements/ngnix/
@@ -44,7 +44,7 @@ services:
     env_file:
       - .env
     volumes:
-      - mariadb:/var/lib/mysql
+      - mariadb_volume:/var/lib/mysql
     networks:
       - inception
     restart : on-failure
@@ -54,17 +54,23 @@ volumes:
   wordpress_volume:
     name: wordpress_volume
     driver: local
-    # driver_opts:
-    #   type: none
-    #   o: bind
-    #   device: ../Data/wordpress
-  mariadb:
-    name: mariadb
-    driver: local
-  # #   driver_opts:
-  # #     type: none
-  # #     o: bind
-  # #     device: ../Data/mariadb
+    driver_opts:
+      device: /Users/beadam/Desktop/inception/inception/srcs/Data/wordpress
+      type: none
+      o: bind
+  mariadb_volume:
+    name: mariadb_volume
+    driver_opts:
+      device: /Users/beadam/Desktop/inception/inception/srcs/Data/mariadb
+      type: volume
+      o: bind
+  # maria_test:
+  #   name: maria_test
+  #   driver: local
+  #   # driver_opts:
+  #   #   device: /Users/beadam/Desktop/inception/inception/srcs/Data/maria_test
+  #   #   type: volume
+  #   #   o: bind
 
 networks:
   inception:

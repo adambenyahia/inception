@@ -1,4 +1,6 @@
 up:
+	mkdir -p srcs/Data/wordpress
+	mkdir -p srcs/Data/mariadb
 	docker-compose --file ./srcs/docker-compose.yml up  -d 
 down:
 	docker-compose  --file ./srcs/docker-compose.yml down
@@ -6,5 +8,5 @@ down:
 clean: down
 	docker rmi -f $$(docker images -q)
 	docker volume prune -f 
-	docker system prune -a --volumes
+	# docker system prune -a --volumes -f
 re: clean up
