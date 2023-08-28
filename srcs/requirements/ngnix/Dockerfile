@@ -1,6 +1,6 @@
 FROM debian:bullseye
 
-RUN apt-get -y update && apt-get -y upgrade && apt-get install -y nginx openssl
+RUN apt-get -y update && apt-get -y upgrade && apt-get install -y nginx openssl netcat
 
 EXPOSE 443
 

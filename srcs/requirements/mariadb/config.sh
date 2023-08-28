@@ -17,10 +17,4 @@ mysql < database.sql
 
 rm -rf database.sql
 
-# start mariadb
-
-service mariadb stop
-
-mysqld_safe
-
-# sleep infinity
+# sleep infinity . just kidding, we're not in a container

@@ -1,20 +1,3 @@
-
-# RUN apt-get update && \
-#     apt-get upgrade && \
-#     apt-get -y install \
-#     mariadb-server mariadb-client \
-#     htop
-
-
-
-
-# COPY config.sh /usr/local/bin/config.sh
-# RUN chmod +x /usr/local/bin/config.sh
-
-# EXPOSE 3306
-# ENTRYPOINT [ "config.sh" ]
-
-
 FROM debian:bullseye
 
 
@@ -46,8 +29,9 @@ COPY 50-server.cnf /etc/mysql/mariadb.conf.d/
 
 
 COPY config.sh /usr/local/bin/config.sh
-RUN chmod +x /usr/local/bin/config.sh 
+RUN chmod +x /usr/local/bin/config.sh
+RUN config.sh
 
 
-ENTRYPOINT [ "config.sh" ] 
+ENTRYPOINT [ "mysqld" ] 
 
