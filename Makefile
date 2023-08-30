@@ -2,6 +2,10 @@ up:
 	@mkdir -p srcs/Data/wordpress
 	@mkdir -p srcs/Data/mariadb
 	docker-compose --file ./srcs/docker-compose.yml up  -d 
+
+stop:
+	docker-compose --file ./srcs/docker-compose.yml stop
+
 down:
 	docker-compose  --file ./srcs/docker-compose.yml down
 

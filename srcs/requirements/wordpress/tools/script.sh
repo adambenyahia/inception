@@ -35,7 +35,6 @@ sed -i "/<?php/a define('WP_REDIS_TIMEOUT', 1);" wp-config.php
 sed -i "/<?php/a define('WP_REDIS_READ_TIMEOUT', 1);" wp-config.php
 sed -i "/<?php/a define('WP_REDIS_DATABASE', 0);" wp-config.php
 
-
 fi
 
 

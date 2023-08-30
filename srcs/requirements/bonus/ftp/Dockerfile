@@ -2,17 +2,27 @@ FROM debian:bullseye
 
 RUN apt-get -y update && apt-get -y upgrade && apt-get install -y htop systemctl vsftpd
 
-ARG FTP_USER
-ENV FTP_USER=$FTP_USER
+ARG WP_ADMIN_USER
+ENV WP_ADMIN_USER=$WP_ADMIN_USER
 
-ARG FTP_PASSWORD
-ENV FTP_PASSWORD=$FTP_PASSWORD
-
-ARG FTP_HOSTNAME
-ENV FTP_HOSTNAME=$FTP_HOSTNAME
+ARG WP_ADMIN_PASSWORD
+ENV WP_ADMIN_PASSWORD=$WP_ADMIN_PASSWORD
 
 
 
-EXPOSE 21 20
+RUN mkdir -p /var/run/vsftpd/empty /home/${WP_ADMIN_USER}
 
-ENTRYPOINT [ "sleep", "infinity" ]
+RUN useradd -m -d /home/${WP_ADMIN_USER} ${WP_ADMIN_USER}
+
+RUN echo "${WP_ADMIN_USER}:${WP_ADMIN_PASSWORD}" | chpasswd
+
+RUN echo "${WP_ADMIN_USER}" >> /etc/vsftpd.userlist
+
+RUN chown ${WP_ADMIN_USER}:${WP_ADMIN_USER} /home/${WP_ADMIN_USER}
+
+
+COPY vsftpd.conf /etc/vsftpd.conf
+
+
+
+ENTRYPOINT [ "vsftpd", "/etc/vsftpd.conf"]

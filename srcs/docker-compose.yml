@@ -37,7 +37,7 @@ services:
       - "9000:9000"
     env_file:
       - .env
-    volumes:  
+    volumes:
       - wordpress_volume:/var/www/html
     depends_on:
       - mariadb
@@ -90,6 +90,27 @@ services:
       - nginx
     restart: always
 
+  ftp:
+    build:
+      context: requirements/bonus/ftp
+      args:
+        WP_ADMIN_USER: ${WP_ADMIN_USER}
+        WP_ADMIN_PASSWORD: ${WP_ADMIN_PASSWORD}
+    container_name: ftp
+    ports:
+      - "21:21"
+      - "21000-21010:21000-21010"
+    networks:
+      - inception
+    volumes:
+      - wordpress_volume:/home/${WP_ADMIN_USER}
+    depends_on:
+      - wordpress
+      - nginx
+    env_file:
+      - .env
+    restart: always
+
     
 
 volumes:
@@ -104,10 +125,11 @@ volumes:
     name: mariadb_volume
     driver_opts:
       device: /Users/beadam/Desktop/inception/inception/srcs/Data/mariadb
-      type: volume
       o: bind
+      type: none
 
 networks:
   inception:
     name: inception
     driver: bridge
+

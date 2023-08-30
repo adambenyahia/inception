@@ -19,11 +19,11 @@ RUN wget https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.ph
 RUN cp wp-cli.phar /usr/local/bin/wp && rm wp-cli.phar
 RUN chmod +x  /usr/local/bin/wp
 
-COPY script.sh /usr/local/bin/script.sh
+COPY tools/script.sh /usr/local/bin/script.sh
 RUN chmod +x /usr/local/bin/script.sh
 RUN script.sh
 
-COPY install.sh /usr/local/bin/install.sh
+COPY tools/install.sh /usr/local/bin/install.sh
 RUN chmod +x /usr/local/bin/install.sh
 
 
