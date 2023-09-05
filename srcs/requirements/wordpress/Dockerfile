@@ -23,10 +23,10 @@ COPY tools/script.sh /usr/local/bin/script.sh
 RUN chmod +x /usr/local/bin/script.sh
 RUN script.sh
 
-COPY tools/install.sh /usr/local/bin/install.sh
-RUN chmod +x /usr/local/bin/install.sh
+COPY tools/init.sh /usr/local/bin/init.sh
+RUN chmod +x /usr/local/bin/init.sh
 
 
 
-ENTRYPOINT ["install.sh"]
+ENTRYPOINT ["init.sh"]
 

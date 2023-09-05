@@ -1,7 +1,8 @@
+
 up:
 	@mkdir -p srcs/Data/wordpress
 	@mkdir -p srcs/Data/mariadb
-	docker-compose --file ./srcs/docker-compose.yml up  -d 
+	docker-compose --file ./srcs/docker-compose.yml up  -d
 
 stop:
 	docker-compose --file ./srcs/docker-compose.yml stop
@@ -19,5 +20,5 @@ flush:
 	rm -rf srcs/Data
 	$(MAKE) re
 
-
 .PHONY: up down clean re flush
+

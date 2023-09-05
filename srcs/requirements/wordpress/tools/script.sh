@@ -1,8 +1,6 @@
 #!/bin/bash
 
-
 mkdir -p /run/php /var/www/html
-
 
 if [ ! -f /var/www/html/wp-config.php ]
 then
@@ -27,6 +25,7 @@ cp wp-config-sample.php wp-config.php
 sed -i 's/^listen = .*/listen = 0.0.0.0:9000/' /etc/php/7.4/fpm/pool.d/www.conf
 
 sed -i "/<?php/a define('FS_METHOD', 'direct');" wp-config.php
+
 sed -i "/<?php/a define('WP_CACHE', true);" wp-config.php
 sed -i "/<?php/a define('WP_CACHE_KEY_SALT', 'beadam.42.fr');" wp-config.php
 sed -i "/<?php/a define('WP_REDIS_HOST', 'redis');" wp-config.php

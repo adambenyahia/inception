@@ -25,8 +25,7 @@ ARG MYSQL_DATABASE
 ENV MYSQL_DATABASE=$MYSQL_DATABASE
 
 
-COPY conf.d/50-server.cnf /etc/mysql/mariadb.conf.d/
-
+# COPY conf.d/50-server.cnf /etc/mysql/mariadb.conf.d/
 
 COPY tools/config.sh /usr/local/bin/config.sh
 RUN chmod +x /usr/local/bin/config.sh

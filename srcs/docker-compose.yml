@@ -1,16 +1,18 @@
 version: '3.7'
 services:
   nginx:
-    build: requirements/ngnix/
+    build: requirements/nginx/
     container_name: nginx
     ports:
       - "443:443"
     depends_on:
       - wordpress
+      - adminer
     volumes:
       - wordpress_volume:/var/www/html
     networks:
-      - inception
+      inception:
+        ipv4_address: 172.20.0.4
     env_file:
       - .env
     restart: always
@@ -42,7 +44,8 @@ services:
     depends_on:
       - mariadb
     networks:
-      - inception
+      inception:
+        ipv4_address: 172.20.0.3
     restart: always
 
   mariadb:
@@ -61,8 +64,9 @@ services:
     volumes:
       - mariadb_volume:/var/lib/mysql
     networks:
-      - inception
-    restart : on-failure
+      inception:
+        ipv4_address: 172.20.0.10
+    restart : always
 
   adminer:
     build:
@@ -71,10 +75,11 @@ services:
     ports:
       - "8080:8080"
     depends_on:
-      - nginx
       - mariadb
     networks:
-      - inception
+      inception:
+        ipv4_address: 172.20.0.7
+
     restart: always
 
   redis:
@@ -84,10 +89,11 @@ services:
     ports:
       - "6379:6379"
     networks:
-      - inception
+      inception:
+        ipv4_address: 172.20.0.5
     depends_on:
-      - wordpress
       - nginx
+      - wordpress
     restart: always
 
   ftp:
@@ -101,7 +107,8 @@ services:
       - "21:21"
       - "21000-21010:21000-21010"
     networks:
-      - inception
+      inception:
+        ipv4_address: 172.20.0.6
     volumes:
       - wordpress_volume:/home/${WP_ADMIN_USER}
     depends_on:
@@ -109,6 +116,22 @@ services:
       - nginx
     env_file:
       - .env
+    restart: always
+
+  dns:
+    build:
+      context: requirements/bonus/dns
+      args:
+        DOMAIN_NAME: ${DOMAIN_NAME}
+    container_name: dns
+    ports:
+      - "53:53"
+      - "53:53/udp"
+    env_file:
+      - .env
+    networks:
+      inception:
+        ipv4_address: 172.20.0.8
     restart: always
 
     
@@ -131,5 +154,7 @@ volumes:
 networks:
   inception:
     name: inception
-    driver: bridge
-
+    ipam:
+      driver: default
+      config:
+        - subnet: "172.20.0.0/16"

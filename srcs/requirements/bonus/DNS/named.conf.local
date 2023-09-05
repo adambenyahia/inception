@@ -1,0 +1,4 @@
+zone "beadam.42.fr" {
+    type master;
+    file "/etc/bind/zones/beadam.42.fr.zone";
+};

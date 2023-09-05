@@ -12,5 +12,4 @@ else
     wp redis enable --force --allow-root
 fi
 
-
 php-fpm7.4 -F
