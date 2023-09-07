@@ -1,7 +1,7 @@
 FROM debian:bullseye
 
-RUN apt-get -y update && apt-get -y upgrade && apt-get install -y htop php php-fpm \
-php-cgi php-cli php-mysql php-mbstring less netcat wget unzip 
+RUN apt-get -y update && apt-get -y upgrade && apt-get install -y php php-fpm \
+php-cgi php-cli php-mysql php-mbstring wget
 
 RUN mkdir -p /run/php
 

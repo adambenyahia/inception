@@ -1,7 +1,7 @@
 FROM debian:bullseye
 
-RUN apt-get -y update && apt-get -y upgrade && apt-get install -y htop php php-fpm \
-php-cgi php-cli php-mysql php-mbstring mariadb-client less netcat wget unzip 
+RUN apt-get -y update && apt-get -y upgrade && apt-get install -y php php-fpm \
+php-cgi php-cli php-mysql php-mbstring mariadb-client wget unzip 
 
 ARG MYSQL_ADMIN_USER
 ENV MYSQL_ADMIN_USER=$MYSQL_ADMIN_USER
