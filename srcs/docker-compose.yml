@@ -121,7 +121,7 @@ services:
 
   dns:
     build:
-      context: requirements/bonus/dns
+      context: requirements/bonus/DNS
       args:
         DOMAIN_NAME: ${DOMAIN_NAME}
     container_name: dns
@@ -142,13 +142,13 @@ volumes:
     name: wordpress_volume
     driver: local
     driver_opts:
-      device: /Users/beadam/Desktop/inception/inception/srcs/Data/wordpress
+      device: ~/data/wordpress
       type: none
       o: bind
   mariadb_volume:
     name: mariadb_volume
     driver_opts:
-      device: /Users/beadam/Desktop/inception/inception/srcs/Data/mariadb
+      device: ~/data/mariadb
       o: bind
       type: none
 

@@ -4,6 +4,8 @@
 
 sed -i "/^\[mysqld\]/a lower_case_table_names = 2" "/etc/mysql/mariadb.conf.d/50-server.cnf"
 
+chown -R mysql:mysql /var/lib/mysql /var/run/mysqld
+
 service mariadb start
 
 # create database
