@@ -2,7 +2,7 @@ FROM debian:bullseye
 
 
 RUN apt-get update -y && apt-get upgrade -y
-RUN apt-get install htop systemctl dialog mariadb-server vim -y
+RUN apt-get install mariadb-server -y
 
 RUN mkdir -p /var/run/mysqld \
     && chown -R mysql:mysql /var/run/mysqld \
@@ -12,14 +12,17 @@ RUN mkdir -p /var/lib/mysql \
     && chown -R mysql:mysql /var/lib/mysql \
     && chmod 777 /var/lib/mysql
 
-ARG MYSQL_ROOT_PASSWORD
-ENV MYSQL_ROOT_PASSWORD=$MYSQL_ROOT_PASSWORD
+ARG WP_ADMIN_PASSWORD
+ENV WP_ADMIN_PASSWORD=$WP_ADMIN_PASSWORD
 
-ARG MYSQL_ADMIN_USER
-ENV MYSQL_ADMIN_USER=$MYSQL_ADMIN_USER
+ARG WP_ADMIN_USER
+ENV WP_ADMIN_USER=$WP_ADMIN_USER
 
-ARG MYSQL_PASSWORD
-ENV MYSQL_PASSWORD=$MYSQL_PASSWORD
+ARG WP_USER
+ENV WP_USER=$WP_USER
+
+ARG WP_USER_PASSWORD
+ENV WP_USER_PASSWORD=$WP_USER_PASSWORD
 
 ARG MYSQL_DATABASE
 ENV MYSQL_DATABASE=$MYSQL_DATABASE

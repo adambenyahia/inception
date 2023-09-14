@@ -3,11 +3,11 @@ FROM debian:bullseye
 RUN apt-get -y update && apt-get -y upgrade && apt-get install -y php php-fpm \
 php-cgi php-cli php-mysql php-mbstring mariadb-client wget unzip 
 
-ARG MYSQL_ADMIN_USER
-ENV MYSQL_ADMIN_USER=$MYSQL_ADMIN_USER
+ARG WP_ADMIN_USER
+ENV WP_ADMIN_USER=$WP_ADMIN_USER
 
-ARG MYSQL_PASSWORD
-ENV MYSQL_PASSWORD=$MYSQL_PASSWORD
+ARG WP_ADMIN_PASSWORD
+ENV WP_ADMIN_PASSWORD=$WP_ADMIN_PASSWORD
 
 ARG MYSQL_DATABASE
 ENV MYSQL_DATABASE=$MYSQL_DATABASE

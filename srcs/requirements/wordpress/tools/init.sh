@@ -12,4 +12,6 @@ else
     wp redis enable --force --allow-root
 fi
 
+chown -R www-data:www-data /var/www/html
+
 php-fpm7.4 -F
